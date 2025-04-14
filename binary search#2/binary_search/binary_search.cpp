@@ -1,20 +1,86 @@
-﻿// binary_search.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <iostream>
+#include <Windows.h>
+#include <vector>
+#include <random>
 
-#include <iostream>
+int bin_search(std::vector<int>& vec, int target)
+{
+	if (vec.empty())
+	{
+		return -1;
+	}
+
+	int l = 0, r = vec.size() - 1; //начало/конец вектора
+	while (l <= r)
+	{
+		int m = l + (r - l) / 2;
+		if (vec[m] == target)
+		{
+			return m;
+		}
+		if (vec[m] < target)
+		{
+			l = m + 1;
+		}
+		else
+		{
+			r = m - 1;
+		}
+
+	}
+
+	return -1;
+}
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	setlocale(LC_ALL, "ru");
+
+	
+	std::cout << "введите размер вектора:--> ";
+	int size;
+	std::cin >> size;
+	while (std::cin.fail() || size <= 0)
+	{
+		std::cout << "Ошибка ввода! Введите число.\n--> ";
+		std::cin.clear();
+		std::cin.ignore(10000, '\n');
+		std::cin >> size;
+	}
+	std::vector<int> vec;
+
+	std::cout << "Введите элементы массива:\n--> ";
+	for (int i = 0; i < size; ++i)
+	{
+		int input;
+		std::cin >> input;
+		while (std::cin.fail())
+		{
+			std::cout << "Ошибка ввода! Введите число.\n--> ";
+			std::cin.clear();
+			std::cin.ignore(10000, '\n');
+			std::cin >> input;
+		}
+		vec.push_back(input);
+	}
+
+	std::cout << "Введите какой элемент нужно найти: ";
+	int key;
+	std::cin >> key;
+	while (std::cin.fail())
+	{
+		std::cout << "Ошибка ввода! Введите число.\n--> ";
+		std::cin.clear();
+		std::cin.ignore(10000, '\n');
+		std::cin >> key;
+	}
+	int result = bin_search(vec, key);
+	std::cout << "Элемент " << key << " находится под индексом " << result << std::endl;
+
+	
+
+
+
+	return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
