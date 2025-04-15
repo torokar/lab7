@@ -10,6 +10,8 @@ int bin_search(std::vector<int>& vec, int target)
 		return -1;
 	}
 
+	std::sort(vec.begin(), vec.end());
+
 	int l = 0, r = vec.size() - 1; //начало/конец вектора
 	while (l <= r)
 	{
@@ -77,10 +79,6 @@ int main()
 	}
 	int result = bin_search(vec, key);
 	std::cout << "Элемент " << key << " находится под индексом " << result << std::endl;
-
-	
-
-
 
 	return 0;
 }
