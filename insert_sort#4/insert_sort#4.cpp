@@ -59,7 +59,6 @@ void ins_sort(std::vector<int>& v)
 
 }
 
-
 int main()
 {
 	setlocale(LC_ALL, "ru");
@@ -80,7 +79,7 @@ int main()
 		vector_for_sort.push_back(input);
 	}
 	print(vector_for_sort);
-	insert_sort(vector_for_sort);
+	ins_sort(vector_for_sort);
 	print(vector_for_sort);
 
 
