@@ -46,9 +46,9 @@ void ins_sort(std::vector<int>& v)
 	}
 
 	for (int i = 0; i < v.size() - 1; i++)
-	{//3 4 5 1 3
-		int tmp = v[i + 1]; //1
-		int j = i;// 2
+	{//1 3 3 4 5  i = 3
+		int tmp = v[i + 1]; //3
+		int j = i;// 3
 		while (j >= 0 && v[j] > tmp)
 		{
 			v[j + 1] = v[j];
