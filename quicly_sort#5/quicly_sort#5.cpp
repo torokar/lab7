@@ -72,20 +72,20 @@ void quic_sort(std::vector<int>& list, int left, int right)
 int main()
 {
 	setlocale(LC_ALL, "ru");
-	std::vector<int> list = { 6, 43, 9, 12, 15, 1 };
+	std::vector<int> list;
 	int size;
-	//std::cout << "Введите размер листа\n--> ";
-	//std::cin >> size;
-	//size_check(size);
-	//std::cout << "Введите элементы листа:\n";
-	//for (int i = 0; i < size; i++)
-	//{
-	//	std::cout << "--> ";
-	//	int n;
-	//	std::cin >> n;
-	//	error_num(n);
-	//	list.push_back(n);
-	//}
+	std::cout << "Введите размер листа\n--> ";
+	std::cin >> size;
+	size_check(size);
+	std::cout << "Введите элементы листа:\n";
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << "--> ";
+		int n;
+		std::cin >> n;
+		error_num(n);
+		list.push_back(n);
+	}
 
 	system("cls");
 	std::cout << "Полученный массив:\n";
@@ -101,6 +101,7 @@ int main()
 
 	quic_sort(list, left, right);
 	
+	std::cout << "Отсортированный вектор:\n";
 	print(list, list.size());
 
 
