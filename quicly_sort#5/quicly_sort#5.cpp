@@ -1,7 +1,6 @@
 ﻿#include <iostream>
-#include <list>
-#define DEBUG
-
+#include <vector>
+#define DEBU
 int error_num(int& num)
 {
 	while (std::cin.fail())
@@ -27,58 +26,82 @@ int size_check(int& size)
 	return size;
 }
 
-void print(std::list<int>& l)
+void print(std::vector<int>& l, int size)
 {
-	std::list<int>::iterator it = l.begin();
-	for (it; it != l.end(); ++it)
+	for (int i = 0; i < size; i++)
 	{
-		std::cout << *it << " ";
+		std::cout << l[i] << " ";
 	}
-	std::cout << "Элементы листа:\n";
-
+	
 	std::cout << std::endl;
 }
 
-void quic_sort(std::list<int>& list, std::list<int>::iterator left,
-	std::list<int>::iterator right, int size)
+void quic_sort(std::vector<int>& list, int left, int right)
 {
 	if (list.empty())
 	{
 		std::cout << "Лист пуст!\n\n";
 		return;
 	}
-	int med = size / 2;
-	std::list<int>::iterator it = list.begin();
-	std::advance(it, med);
-#ifdef DEBUG
-	std::cout << "Средний элемент: " << *it << std::endl;
-#endif // DEBUG
-	
+	if (left > right)
+	{
+		return;
+	}
 
+	int pivon = list[(left + right) / 2];
+	int i = left;
+	int j = right;
+	while (i <= j)
+	{
+		while (list[i] < pivon) ++i;
+		while (list[j] > pivon) --j;
+		if (i <= j)
+		{
+			int tmp = list[i];
+			list[i] = list[j];
+			list[j] = tmp;
+			++i;
+			--j;
+
+		}
+	}
+	quic_sort(list, left, j);
+	quic_sort(list, i, right);
 }
 
 int main()
 {
 	setlocale(LC_ALL, "ru");
-	std::list<int> list;
+	std::vector<int> list = { 6, 43, 9, 12, 15, 1 };
 	int size;
-	std::cout << "Введите размер листа\n--> ";
-	std::cin >> size;
-	size_check(size);
-	std::cout << "Введите элементы листа:\n";
-	for (int i = 0; i < size; i++)
-	{
-		std::cout << "--> ";
-		int n;
-		std::cin >> n;
-		error_num(n);
-		list.push_back(n);
-	}
+	//std::cout << "Введите размер листа\n--> ";
+	//std::cin >> size;
+	//size_check(size);
+	//std::cout << "Введите элементы листа:\n";
+	//for (int i = 0; i < size; i++)
+	//{
+	//	std::cout << "--> ";
+	//	int n;
+	//	std::cin >> n;
+	//	error_num(n);
+	//	list.push_back(n);
+	//}
 
 	system("cls");
 	std::cout << "Полученный массив:\n";
-	print(list);
-	quic_sort(list, list.begin(), list.end(), list.size());
+	print(list, list.size());
+	int left = 0;
+	int right = list.size() - 1;
+
+#ifdef DEBUG
+	std::cout << "Левый элемент: " << left << std::endl;
+	std::cout << "Правый элемент: " << right << std::endl;
+#endif // DEBUG
+
+
+	quic_sort(list, left, right);
+	
+	print(list, list.size());
 
 
 	return 0;
