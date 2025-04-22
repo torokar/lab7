@@ -11,14 +11,19 @@ int get_positive_size();
 int main()
 {
 	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
+	SetConsoleOutputCP(1251); //Кодировка 1251 русский текст и ввод в консоли 
 
 
 	std::cout << "Введите размер массива:\n--> ";
 	int size = get_positive_size();
 	
 	error_input(size);
-	int* mas = new int[size];
+	if (size == 0)
+	{
+		std::cout << "Массив пуст!\n";
+		return 1;
+	}
+	int* mas = new int[size]; //динамический массив 
 
 
 	for (int i = 0; i < size; i++)
@@ -27,7 +32,7 @@ int main()
 		int input_in_mas;
 		std::cin >> input_in_mas;
 		error_input(input_in_mas);
-		mas[i] = input_in_mas;
+		mas[i] = input_in_mas; //Запись элементов в массив
 	}
 	print(mas, size);
 
@@ -40,16 +45,16 @@ int main()
 	else{std::cout << "Искомый элемент стоит на позиции " << result << std::endl; }
 
 
-	delete[] mas;
+	delete[] mas; //Освобождение памяти
 
 	return 0;
 }
 
-int LineFaind(int* mas, int size, int key)
+int LineFaind(int* mas, int size, int key) // Сам алгоритм линейного поиска
 {
 	int pos = 0;
 	while (pos < size && mas[pos] != key) { pos++; }
-	if (pos == size)
+	if (pos == size) //Условие если элемент не найден
 	{
 		pos = -1;
 	}
